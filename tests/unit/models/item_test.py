@@ -1,25 +1,25 @@
-from unittest import TestCase
-
-from models.item import ItemModel
+from tests.unit.base_test_unit import BaseTestUnit
 
 
-class ItemTest(TestCase):
+class ItemTest(BaseTestUnit):
     def test_create_item(self):
-        item = ItemModel('test', 19.99)
 
-        self.assertEqual(item.name, 'test',
+        self.assertEqual(self.item1.name, 'Head',
                          "The name of the item after creation does not equal the constructor argument.")
-        self.assertEqual(item.price, 19.99,
+        self.assertEqual(self.item1.price, 1000.99,
                          "The price of the item after creation does not equal the constructor argument.")
 
-    def test_item_json(self):
-        item = ItemModel('test', 19.99)
-        expected = {
-            'name': 'test',
-            'price': 19.99
-        }
+        self.assertEqual(self.item1.store_id, 1)
+        self.assertIsNone(self.item1.store)
 
+    def test_item_json(self):
+        expected = {
+            'name': 'Head',
+            'price': 1000.99
+        }
         self.assertEqual(
-            item.json(),
+            self.item1.json(),
             expected,
-            "The JSON export of the item is incorrect. Received {}, expected {}.".format(item.json(), expected))
+            "The JSON export of the item is incorrect. Received {}, expected {}.".format(self.item1.json(), expected))
+
+

@@ -9,7 +9,7 @@ from resources.store import Store, StoreList
 app = Flask(__name__)
 
 app.config['DEBUG'] = True
-
+#  sqlite will not check the integration when created item has relationship
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 api = Api(app)
@@ -32,3 +32,4 @@ if __name__ == '__main__':
             db.create_all()
 
     app.run(port=5000)
+
